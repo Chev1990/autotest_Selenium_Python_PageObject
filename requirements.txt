@@ -1,0 +1,16 @@
+atomicwrites==1.4.0
+attrs==21.2.0
+colorama==0.4.4
+document==1.0
+importlib-metadata==4.6.1
+more-itertools==8.8.0
+packaging==21.0
+pluggy==0.13.1
+py==1.10.0
+pyparsing==2.4.7
+pytest==5.1.1
+selenium==3.141.0
+typing-extensions==3.10.0.0
+urllib3==1.25.9
+wcwidth==0.2.5
+zipp==3.5.0
