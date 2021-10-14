@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
 from .locators import LoginPageLocators
-from selenium import webdriver
+from .locators import MainPageLocators
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -22,5 +22,5 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REG_FORM), "Register form  is not presented"
 
     def go_to_login_page(self):
-        login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
-        login_link.click()
+        link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
+        link.click()
