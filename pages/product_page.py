@@ -70,3 +70,11 @@ class BasketPage(base_page.BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*MessProductPageLocators.MESSPROD_LINK), \
+        "Success message is presented, but should not be"
+
+    def should_disappeared_success_message(self):
+        assert self.is_disappeared(*MessProductPageLocators.MESSPROD_LINK), \
+        "Success message is disappeared, but should not be"
