@@ -13,6 +13,8 @@ class BasketPageLocators():
     BASKET_LINK = (By.CSS_SELECTOR, "#add_to_basket_form")
 class ProductPageLocators():
     PRODUCT_LINK = (By.CSS_SELECTOR, "div.col-sm-6.product_main>h1")
+    BASKET_BUTTON = (By.CSS_SELECTOR, '.basket-mini>span>a')
+    BASKET_EMPTY_MESSAGE = (By.XPATH, '//div[@id="content_inner"]//p[contains(text(),"Your basket is empty.")]')
 class PricePageLocators():
     PRICE_LINK = (By.CSS_SELECTOR, "p.price_color")
 class MessProductPageLocators():

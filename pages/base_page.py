@@ -2,6 +2,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from .locators import BasePageLocators
+from .locators import ProductPageLocators
 import time
 
 class BasePage():

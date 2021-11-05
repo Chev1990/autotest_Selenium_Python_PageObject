@@ -11,7 +11,7 @@ from selenium import webdriver
 import math
 import time
 
-class BasketPage(base_page.BasePage):
+class ProductPage(base_page.BasePage):
     def should_be_basket_page(self):
         self.should_be_basket_url()
 
