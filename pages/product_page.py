@@ -8,6 +8,8 @@ from .locators import MessPricePageLocators
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions
 import math
 import time
 
@@ -78,3 +80,30 @@ class ProductPage(base_page.BasePage):
     def should_disappeared_success_message(self):
         assert self.is_disappeared(*MessProductPageLocators.MESSPROD_LINK), \
         "Success message is disappeared, but should not be"
+
+    def add_to_card(self)->bool:
+        try:
+            self.browser.find_element(*ProductPageLocators.ADD_ITEM_BUTTON).click()
+            return True
+        except NoSuchElementException:
+            return False
+
+    def get_product_name(self)->str:
+        try:
+            return self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_TEXT).text
+        except NoSuchElementException:
+            return None
+
+    def get_success_message_after_add_product_to_basket(self)->str:
+        WebDriverWait(self.browser, 20).until(expected_conditions.presence_of_element_located(ProductPageLocators.SUCCESS_ADD_PRODUCT_TO_BASKET_TEXT))
+        try:
+            return self.browser.find_element(*ProductPageLocators.SUCCESS_ADD_PRODUCT_TO_BASKET_TEXT).text
+        except NoSuchElementException:
+            return None
+
+    def check_product_name_on_page_and_in_message(self):
+        result = self.get_success_message_after_add_product_to_basket()
+        product_name = self.get_product_name()
+        assert result == product_name, 'Product name not equal'
+
+

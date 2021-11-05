@@ -1,0 +1,5 @@
+[pytest]
+markers =
+    parametrize: for web-param
+    need_review: marker for need_review
+    login: marker for login_guest
