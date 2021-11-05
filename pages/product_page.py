@@ -21,12 +21,24 @@ class ProductPage(base_page.BasePage):
         # реализуйте проверку на корректный url адрес
         assert "?promo=newYear" in self.browser.current_url, "Current link is not correct"
 
+    def get_price(self)->str:
+        try:
+            return self.browser.find_element(*ProductPageLocators.PRICE_TEXT).text
+        except NoSuchElementException:
+            return None
+
+    def get_price_from_message(self)->str:
+        WebDriverWait(self.browser, 20).until(expected_conditions.presence_of_element_located(ProductPageLocators.MESSAGE_PRICE_TEXT))
+        try:
+            return self.browser.find_element(*ProductPageLocators.MESSAGE_PRICE_TEXT).text
+        except NoSuchElementException:
+            return None
+
     def go_to_basket_page(self):
         link = self.browser.find_element(*BasketPageLocators.BASKET_LINK)
         link.click()
 
     def find_price_page(self):
-        #price = is_element_present
         price = self.browser.find_element(*PricePageLocators.PRICE_LINK)
         return price.text
 
@@ -53,7 +65,6 @@ class ProductPage(base_page.BasePage):
         if mes_flag:
             mes_price=self.browser.find_element(*MessPricePageLocators.MESSPRICE_LINK)
             print(f"Your price_basket!!!!!: {mes_price.text}")
-            #mes_product1 = product + " has been added to your basket"
             assert mes_price.text == price, "NOT EQUAL PRICES!!!"
         else:
             raise Exception("No message with price")
@@ -105,5 +116,10 @@ class ProductPage(base_page.BasePage):
         result = self.get_success_message_after_add_product_to_basket()
         product_name = self.get_product_name()
         assert result == product_name, 'Product name not equal'
+
+    def check_price_on_page_and_in_message(self):
+        price = self.get_price()
+        price_from_message = self.get_price_from_message()
+        assert price == price_from_message, 'Price not equal'
 
 
