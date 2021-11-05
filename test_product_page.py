@@ -2,7 +2,7 @@ from .pages.product_page import BasketPage
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 import pytest
-@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
+'''@pytest.mark.parametrize('link', ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0"
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
@@ -52,4 +52,17 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     basket_page = BasketPage(browser, link)
     basket_page.open()
     basket_page.go_to_basket_page()
-    basket_page.should_disappeared_success_message()
+    basket_page.should_disappeared_success_message()'''
+
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = BasketPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = BasketPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+    page.should_be_login_link()
